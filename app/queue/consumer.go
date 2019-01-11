@@ -41,8 +41,8 @@ func NewConsumer(queue string) Consumer {
 		taskMetric: *promauto.NewHistogramVec(prometheus.HistogramOpts{
 			Namespace: namespace,
 			Subsystem: subSystem,
-			Name:      "tasks_error",
-			Help:      "Total number of failed tasks",
+			Name:      "tasks_completed",
+			Help:      "Histogram of tasks completed",
 			Buckets: []float64{
 				float64(1),
 				float64(5),
@@ -98,6 +98,8 @@ func (c Consumer) Consume(delivery rmq.Delivery) {
 		var s signature.AppDelete
 		_ = json.Unmarshal([]byte(delivery.Payload()), &s)
 		c.consume(s)
+	// You will notice that signature.AppReadName is missing:
+	// this is just to ensure that we'll have some unrecognized signature metrics to populate
 	default:
 		logrus.Warningf("Rejecting task due to unrecognized signature (%s)", id)
 		c.rejectedMetric.WithLabelValues(id).Inc()
