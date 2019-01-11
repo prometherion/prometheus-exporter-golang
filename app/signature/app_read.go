@@ -2,7 +2,7 @@ package signature
 
 import "encoding/json"
 
-const AppReadName = "V1_Deployment_Update"
+const AppReadName = "V1_Deployment_Read"
 
 type AppRead struct {
 	Name string
@@ -15,8 +15,8 @@ func (AppRead) Id() string {
 func (d AppRead) Bytes() (byte []byte, err error) {
 	return json.Marshal(struct {
 		AppRead
-		Name string
+		Id string
 	}{
-		Name:      d.Id(),
+		Id: d.Id(),
 	})
 }

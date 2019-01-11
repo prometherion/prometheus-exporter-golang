@@ -17,9 +17,9 @@ func (AppUpdate) Id() string {
 func (d AppUpdate) Bytes() (byte []byte, err error) {
 	return json.Marshal(struct {
 		AppUpdate
-		Name string
+		Id string
 	}{
 		AppUpdate: d,
-		Name:      d.Id(),
+		Id:      d.Id(),
 	})
 }
