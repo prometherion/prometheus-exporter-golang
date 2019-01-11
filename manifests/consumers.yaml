@@ -1,0 +1,144 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: create
+  name: consumer-create
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-exporter-golang
+      component: consumer
+      queue: create
+  template:
+    metadata:
+      labels:
+        app: prometheus-exporter-golang
+        component: consumer
+        queue: create
+    spec:
+      containers:
+        - name: prometheus-exporter-golang
+          command:
+            - /prometheus-exporter-golang
+            - --redis-connection-string=redis:6379
+            - --redis-connection-tag=k8s
+            - consume
+            - --action=create
+          image: prometherion/prometheus-exporter-golang:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9000
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: delete
+  name: consumer-delete
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-exporter-golang
+      component: consumer
+      queue: delete
+  template:
+    metadata:
+      labels:
+        app: prometheus-exporter-golang
+        component: consumer
+        queue: delete
+    spec:
+      containers:
+        - name: prometheus-exporter-golang
+          command:
+            - /prometheus-exporter-golang
+            - --redis-connection-string=redis:6379
+            - --redis-connection-tag=k8s
+            - consume
+            - --action=delete
+          image: prometherion/prometheus-exporter-golang:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9000
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: read
+  name: consumer-read
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-exporter-golang
+      component: consumer
+      queue: read
+  template:
+    metadata:
+      labels:
+        app: prometheus-exporter-golang
+        component: consumer
+        queue: read
+    spec:
+      containers:
+        - name: prometheus-exporter-golang
+          command:
+            - /prometheus-exporter-golang
+            - --redis-connection-string=redis:6379
+            - --redis-connection-tag=k8s
+            - consume
+            - --action=read
+          image: prometherion/prometheus-exporter-golang:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9000
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: update
+  name: consumer-update
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-exporter-golang
+      component: consumer
+      queue: update
+  template:
+    metadata:
+      labels:
+        app: prometheus-exporter-golang
+        component: consumer
+        queue: update
+    spec:
+      containers:
+        - name: prometheus-exporter-golang
+          command:
+            - /prometheus-exporter-golang
+            - --redis-connection-string=redis:6379
+            - --redis-connection-tag=k8s
+            - consume
+            - --action=update
+          image: prometherion/prometheus-exporter-golang:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9000

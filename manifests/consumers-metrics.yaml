@@ -1,0 +1,76 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: create
+  name: consumer-create-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: create
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: delete
+  name: consumer-delete-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: delete
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: read
+  name: consumer-read-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: read
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: update
+  name: consumer-update-metrics
+spec:
+  ports:
+    - name: metrics
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: prometheus-exporter-golang
+    component: consumer
+    queue: update
