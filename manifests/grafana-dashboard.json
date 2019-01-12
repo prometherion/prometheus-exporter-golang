@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -407,7 +407,7 @@
       ],
       "targets": [
         {
-          "expr": "prometherion_worker_tasks_completed_sum{success=\"false\"}",
+          "expr": "prometherion_worker_tasks_completed_count{success=\"false\"}",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -456,7 +456,7 @@
     ]
   },
   "timezone": "",
-  "title": "New dashboard",
-  "uid": null,
-  "version": 0
+  "title": "Prometherion",
+  "uid": "7LvtBZwiz",
+  "version": 1
 }
