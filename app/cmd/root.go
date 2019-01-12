@@ -10,10 +10,18 @@ import (
 )
 
 const (
+	// Persistent flags
 	redisConString      = "redis-connection-string"
 	redisConStringUsage = "The Redis TCP connection string to connect to queue backend"
 	queueTag            = "redis-connection-tag"
 	queueTagUsage       = "The queue tag used to identify queues"
+	// Flags
+	action = "action"
+	// Tasks ops
+	create = "create"
+	read   = "read"
+	update = "update"
+	delete = "delete"
 )
 
 var (

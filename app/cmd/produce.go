@@ -4,16 +4,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	// Flags
-	action = "action"
-	// Tasks ops
-	create = "create"
-	read   = "read"
-	update = "update"
-	delete = "delete"
-)
-
 var produceCmd = &cobra.Command{
 	Use:   "produce",
 	Short: "Produce a action",

@@ -47,7 +47,5 @@ func init() {
 	rootCmd.AddCommand(consumeCmd)
 
 	consumeCmd.PersistentFlags().String(action, "", "Select the CRUD operation to consume")
-	if err := consumeCmd.MarkPersistentFlagRequired(action); err != nil {
-		panic(err)
-	}
+	_ = consumeCmd.MarkPersistentFlagRequired(action)
 }
