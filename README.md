@@ -21,7 +21,7 @@ Sending build context to Docker daemon  11.04MB
 (...)
 Successfully tagged prometherion/prometheus-exporter-golang:latest
 
-$ kubectl -n prometherion create -f manifests
+$ kubectl -n prometherion create -f manifests/k8s
 service/consumer-create-metrics created
 service/consumer-delete-metrics created
 service/consumer-read-metrics created
@@ -61,7 +61,7 @@ Since it's a default installation, you can login with credentials
 
 So you can add the _Prometheus_ datasource using the address
 `http://prometheus:9090` and load the
-[dashboard](manifests/grafana-dashboard.json).
+[dashboard](manifests/grafana/dashboard.json).
 
 # How to produce some data
 
