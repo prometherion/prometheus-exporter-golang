@@ -18,9 +18,10 @@ const (
 	subSystem = "worker"
 )
 
+
 func NewConsumer(queue string) Consumer {
 	return Consumer{
-		unmarshalMetric: *promauto.NewCounterVec(prometheus.CounterOpts{
+		unmarshalMetric: promauto.NewCounter(prometheus.CounterOpts{
 			Namespace: namespace,
 			Subsystem: subSystem,
 			Name:      "tasks_error_unmarshal",
@@ -28,7 +29,7 @@ func NewConsumer(queue string) Consumer {
 			ConstLabels: map[string]string{
 				"queue": queue,
 			},
-		}, nil),
+		}),
 		rejectedMetric: *promauto.NewCounterVec(prometheus.CounterOpts{
 			Namespace: namespace,
 			Subsystem: subSystem,
@@ -61,7 +62,7 @@ func NewConsumer(queue string) Consumer {
 }
 
 type Consumer struct {
-	unmarshalMetric prometheus.CounterVec
+	unmarshalMetric prometheus.Counter
 	rejectedMetric  prometheus.CounterVec
 	taskMetric      prometheus.HistogramVec
 }
@@ -74,7 +75,7 @@ func (c Consumer) Consume(delivery rmq.Delivery) {
 	var task interface{}
 
 	if err := json.Unmarshal([]byte(delivery.Payload()), &task); err != nil {
-		c.unmarshalMetric.WithLabelValues().Inc()
+		c.unmarshalMetric.Inc()
 		logrus.Warningf("Rejecting task due to error (%s)", err.Error())
 		delivery.Reject()
 		return
